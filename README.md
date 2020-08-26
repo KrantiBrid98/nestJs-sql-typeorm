@@ -1,17 +1,15 @@
 
+<h3>CRUD application using nestjs, mysql and typeOrm.</h3>
 ## Running the app
 
 ```bash
 # development
 $ npm run start
-
 # watch mode
 $ npm run start:dev
-
 # production mode
 $ npm run start:prod
 ```
-<p>CRUD application using nestjs, mysql and typeOrm.</p>
 <p>Following are various endpoints available</p>
 <ul>
 <li>GET/users</li>
