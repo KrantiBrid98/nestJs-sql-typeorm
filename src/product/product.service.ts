@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './product.entity';
-import { Repository } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import { AddressEntity } from 'src/address/address.entity';
 import { UsersEntity } from 'src/users/users.entity';
 
@@ -22,13 +22,22 @@ export class ProductService {
         return details;
     }
 
-     async showUserDetails(userId: number) {
-        return await this.productRepository.createQueryBuilder('t1') // t1 = product
-            .addSelect('t1.id', 't1_id') 
-            .addSelect('t2.city', 't2_city') // t2 = address
-            .addSelect('t3.email', 't3_email')  // t3 = user
-            .innerJoin(AddressEntity, 't2', `t1.userId = ${userId}`)
-            .innerJoin(UsersEntity, 't3', `t2.userId = ${userId}`)
-            .getRawMany()      
+    async showUserDetails(userId: number) {
+        return await getManager()
+        .createQueryBuilder(UsersEntity,'users')
+        .addSelect('users.name','users.name')
+        .addSelect('users.email','users.email')
+        .addSelect('users.id','users.id')
+        .addSelect('address.city','address.city')
+        .addSelect('product.name','product.name')
+        .innerJoin(AddressEntity, 'address', 'users.id = address.userId')
+        .innerJoin(ProductEntity, 'product', 'address.userId = product.userId')
+        .where(`users.id= ${userId}`)
+        .getRawMany()
+        // sql query
+        // select users.name, users.email, users.id, address.state, product.name
+        // from users 
+        // inner join address on users.id = address.userId
+        // inner join product on address.userId = product.userId
     }
 }

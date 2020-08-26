@@ -12,8 +12,8 @@ export class ProductController {
     }
 
     @Post()
-    // MandatoryFieldsPipe for validating whether 'userId', 'state', 'city' are provided in the body by user
-    async createUsers(@Body(new MandatoryFieldsPipe(['name','userId'])) data) {
+    // MandatoryFieldsPipe for validating whether 'name','userId', 'addressId' are provided in the body by user
+    async createUsers(@Body(new MandatoryFieldsPipe(['name','userId', 'addressId'])) data) {
         return {
             statusCode: HttpStatus.OK,
             message: 'User added successfully',
@@ -21,6 +21,7 @@ export class ProductController {
         };
     }
 
+    // fetches record from user, product and address table using inner join
     @Get('/details/:id')
     async getUserDetails(@Param('id') userId: number) {
         return await this.productService.showUserDetails(userId)
