@@ -1,0 +1,23 @@
+uses of pipe:
+1. Validation of input data
+2. Transformation of input data to desired form (int to string)
+Order of pipe use in important (eg DefaultValuePipe and then ParseIntPipe)
+use built in pipes for validation usually instead of creating own pipes
+
+uses of middleware
+Middleware functions have access to the request and response objects, and the next()
+1. They are used for intermidate operations between client and server.
+2. Validation of headers or adding headers to response.
+next() needs to be called in the end.
+Middleware are configured always in module.ts file
+
+
+get keyword makes <function name> to be used as a variables and not call it as a function
+
+press control + . on class name that implements interface to add that interface.
+eg press control + . on MandatoryFieldsPipe to implement transform interface.
+
+nest g pipe <name>
+nest g service <name>
+nest g controller <name>
+nest g module <name>
