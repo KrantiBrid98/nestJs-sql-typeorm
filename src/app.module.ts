@@ -15,7 +15,7 @@ import { ProductModule } from './product/product.module';
       password: 'password',
       database: 'nestjs_mysql_crud_app',
       entities: ["dist/**/**.entity{.ts,.js}"],
-      synchronize: true,
+      // synchronize: true,
       logging: true
  }), UsersModule, AddressModule, ProductModule],
   controllers: [AppController],
