@@ -17,7 +17,7 @@
 
 CRUD application using nestjs, mysql and typeOrm.
 There are three tables namely user, address and product are used in this application. 
-Details about the user like name, email, address, products buied etc can be added, updated, fetched and deleted from the database.
+Details about the user like name, email, address, products which the user bought etc can be added, updated, fetched and deleted from the database.
 
 <!-- Built With -->
 ### Built With
@@ -52,7 +52,7 @@ Please make sure that Node.js (>= 10.13.0) is installed on your operating system
 
 
 ## Running the app
-Application starts at <b>localhost:3000/</b>
+Application starts at <b>http://localhost:3000/</b>
 ```bash
 # development
 $ npm run start
