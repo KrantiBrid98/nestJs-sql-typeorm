@@ -51,4 +51,8 @@ export class UsersService {
   async readUserAddress(id:number){
     return this.usersRepository.find({ where: { id }, relations: ["address"] });
   }
+
+  async findOne(username: string): Promise<any | undefined>{
+    return this.usersRepository.findOne({ where: {name: username}});
+  }
 }

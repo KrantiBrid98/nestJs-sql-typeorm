@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AddressModule } from './address/address.module';
 import { ProductModule } from './product/product.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +18,7 @@ import { ProductModule } from './product/product.module';
       entities: ["dist/**/**.entity{.ts,.js}"],
       // synchronize: true,
       logging: true
- }), UsersModule, AddressModule, ProductModule],
+ }), UsersModule, AddressModule, ProductModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

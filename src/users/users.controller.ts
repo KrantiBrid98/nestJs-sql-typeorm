@@ -9,17 +9,32 @@ import {
   HttpStatus,
   Query,
   DefaultValuePipe,
-  ParseIntPipe
+  ParseIntPipe,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 
 import { UsersService } from './users.service';
 import { UsersDTO } from './users.dto';
 import { MandatoryFieldsPipe } from 'src/mandatoryField.validation';
-
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from 'src/auth/auth/jwt-auth.guard';
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService
+  ) { }
 
+  @UseGuards(LocalAuthGuard)
+  @Post('/login')
+  async login(@Request() req) {
+    console.log(req.user)
+    return this.authService.login(req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   async showAllUsers(@Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(5), ParseIntPipe) limit: number) {
@@ -72,5 +87,5 @@ export class UsersController {
       data: await this.usersService.readUserAddress(id),
     };
   }
-  
+
 }
